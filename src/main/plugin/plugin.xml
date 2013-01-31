@@ -1,0 +1,11 @@
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.jivesoftware.com/schemas/clearspace/2_5/plugin.xsd">
+    <name>countdown-widget</name>
+    <description>Simple countdown widget.</description>
+    <author>Spectrum Health Web Dev Labs</author>
+    <version>1.0.0</version>    
+    <minServerVersion>5.0.0.0</minServerVersion>
+    <maxServerVersion>5.5.0.0</maxServerVersion>
+    <!-- Defines a custom widget for this plugin -->
+    <widget class="com.spectrumhealth.webdev.labs.CountdownWidget" />
+</plugin>

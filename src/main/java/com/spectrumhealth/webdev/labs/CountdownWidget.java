@@ -8,18 +8,20 @@ import com.jivesoftware.community.widget.WidgetTypeMarker;
 import com.jivesoftware.community.widget.WidgetType;
 
 @WidgetTypeMarker({WidgetType.COMMUNITY, WidgetType.HOMEPAGE, WidgetType.PERSONALIZEDHOMEPAGE, WidgetType.SOCIALGROUP, WidgetType.PROJECT})
-@PropertyNames({"countdownDate", "coutndownTime", "color"})
+@PropertyNames({"countdownDate", "coutndownTime", "numericColor", "labelColor"})
 public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidget {
     private static final String FREEMARKER_FILE = "/plugins/countdown-widget/resources/templates/main.ftl";
-    private String countdownDate = "1/1/2013";
+    private String countdownDate = "1/1/2020";
     private String countdownTime = "5:00PM";
-    private String color = "test";
+    private String numericColor = "Green";
+    private String labelColor = "Black";
     
     protected Map<String, Object> loadProperties(WidgetContext widgetContext, ContainerSize size) {
         Map<String, Object> properties = super.loadProperties(widgetContext, size);
         properties.put("countdownDate", this.countdownDate);
         properties.put("countdownTime", this.countdownTime);
-        properties.put("color", this.color);
+        properties.put("numericColor", this.numericColor);
+        properties.put("labelColor", this.labelColor);
         return properties;
     }
 	
@@ -52,11 +54,19 @@ public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidge
 		this.countdownTime = countdownTime;
 	}
 	
-	public String getColor() {
-		return color;
+	public String getNumericColor() {
+		return numericColor;
 	}
 	
-	public void setColor(String color) {
-		this.color = color;
+	public void setNumericColor(String color) {
+		this.numericColor = color;
+	}
+	
+	public String getLabelColor() {
+		return this.labelColor;
+	}
+	
+	public void setLabelColor(String color) {
+		this.labelColor = color;
 	}
 }

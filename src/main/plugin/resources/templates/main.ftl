@@ -1,2 +1,2 @@
 <pre>Countdown to: ${countdownDate} ${countdownTime}</pre>
-<pre>Color me: ${color}</pre>
+<pre>Color Labels: ${labelColor}, Color Numbers: $(numberColor}</pre>

@@ -1,7 +1,2 @@
-<#list jive?keys as var>
-    ${var}
-</#list>
-
-<script type="text/javascript">
-
-</script>
+<pre>Countdown to: ${countdownDate} ${countdownTime}</pre>
+<pre>Color me: ${color}</pre>

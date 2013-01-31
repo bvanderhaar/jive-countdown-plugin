@@ -17,6 +17,10 @@
             document.getElementById("time").innerHTML = DisplayFormat;
             setTimeout("CountBack("+(seconds-1)+")", 1000);
     }
+    
+    $j(document).ready(function() {
+        startCountdown();
+    });
 </script>
 
 <style type="text/css">

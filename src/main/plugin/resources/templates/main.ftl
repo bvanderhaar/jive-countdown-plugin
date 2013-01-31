@@ -10,9 +10,9 @@
     }
     function CountBack(seconds) {
         $j('#${idPrefix}-timer-days').text(Math.floor(seconds/86400)%100000);
-        $j('#${idPrefix}-timer-hours').text(Math.floor(seconds/3600))%24);
-        $j('#${idPrefix}-timer-mins').text(Math.floor(seconds/60))%60);
-        $j('#${idPrefix}-timer-sec').text(Math.floor(seconds))%60);
+        $j('#${idPrefix}-timer-hours').text(Math.floor(seconds/3600)%24);
+        $j('#${idPrefix}-timer-mins').text(Math.floor(seconds/60)%60);
+        $j('#${idPrefix}-timer-sec').text(Math.floor(seconds)%60);
         setTimeout("CountBack("+(seconds-1)+")", 1000);
     }
     

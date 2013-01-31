@@ -1,0 +1,7 @@
+.DS_Store
+countdown-jive-plugin/.classpath
+countdown-jive-plugin/.project
+countdown-jive-plugin/.settings
+.metadata/*
+countdown-jive-plugin/bin/*
+countdown-jive-plugin/target/*

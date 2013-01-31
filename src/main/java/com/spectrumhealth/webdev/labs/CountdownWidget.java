@@ -1,5 +1,7 @@
 package com.spectrumhealth.webdev.labs;
 
+import java.util.Map;
+
 import com.jivesoftware.community.widget.WidgetContext;
 import com.jivesoftware.community.annotations.PropertyNames;
 import com.jivesoftware.community.widget.WidgetTypeMarker;
@@ -12,6 +14,14 @@ public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidge
     private String countdownDate = "1/1/2013";
     private String countdownTime = "5:00PM";
     private String color = "test";
+    
+    protected Map<String, Object> loadProperties(WidgetContext widgetContext, ContainerSize size) {
+        Map<String, Object> properties = super.loadProperties(widgetContext, size);
+        properties.put("countdownDate", this.countdownDate);
+        properties.put("countdownTime", this.countdownTime);
+        properties.put("color", this.color);
+        return properties;
+    }
 	
 	public String getDescription(WidgetContext arg0) {
 		return "Displays a countdown from a specified date time.";

@@ -1,7 +1,7 @@
-<#list .main?keys as var>
+<#list jive?keys as var>
     ${var}
 </#list>
-<pre>${color}</pre>
+
 <script type="text/javascript">
 
 </script>

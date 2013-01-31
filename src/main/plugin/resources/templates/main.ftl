@@ -68,5 +68,5 @@
 </style>
 
 <p id="${idPrefix}-timer" class="countdown countdown-${labelColor}UI">
-	<span id="${idPrefix}-timer-weeks"></span> <span class='cd-time'>weeks</span><span id="${idPrefix}-timer-days"></span> <span class='cd-time'>days</span> <span id="${idPrefix}-timer-hours"></span> <span class='cd-time'>hours</span> <span id="${idPrefix}-timer-mins"></span> <span class='cd-time'>mins</span> <span id="${idPrefix}-timer-sec"></span> <span class='cd-time'>sec</span>
+	<span id="${idPrefix}-timer-weeks"></span> <span class='cd-time'>weeks</span> <span id="${idPrefix}-timer-days"></span> <span class='cd-time'>days</span> <span id="${idPrefix}-timer-hours"></span> <span class='cd-time'>hours</span> <span id="${idPrefix}-timer-mins"></span> <span class='cd-time'>mins</span> <span id="${idPrefix}-timer-sec"></span> <span class='cd-time'>sec</span>
 </p>

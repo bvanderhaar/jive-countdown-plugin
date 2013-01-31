@@ -68,4 +68,23 @@
 
 </style>
 
+<<<<<<< HEAD
 <p id="time" class="countdown countdown-${labelColor}UI"></p>
+=======
+<script type="text/javascript">
+
+    $j(document).ready(function () {
+
+    $j("#time").countdown({
+        date: "${countdownDate} ${countdownTime}",
+        leadingZero: true
+    });
+
+    });
+
+</script>
+
+<p id="${idPrefix}-timer" class="countdown countdown-${labelColor}UI">
+	<span id="${idPrefix}-timer-days"></span> <span class='cd-time'>days</span> <span id="${idPrefix}-timer-hours"></span> <span class='cd-time'>hours</span> <span id="${idPrefix}-timer-mins"></span> <span class='cd-time'>mins</span> <span id="${idPrefix}-timer-sec"></span> <span class='cd-time'>sec</span>
+</p>
+>>>>>>> 18dffdf86a7f56900e6ae0134f386cf3b71b7f38

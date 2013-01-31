@@ -9,7 +9,8 @@
         CountBack(seconds);
     }
     function CountBack(seconds) {
-        $j('#${idPrefix}-timer-days').text(Math.floor(seconds/86400)%100000);
+        $j('#${idPrefix}-timer-weeks').text(Math.floor(seconds/604800));
+        $j('#${idPrefix}-timer-days').text(Math.floor(seconds/86400)%7);
         $j('#${idPrefix}-timer-hours').text(Math.floor(seconds/3600)%24);
         $j('#${idPrefix}-timer-mins').text(Math.floor(seconds/60)%60);
         $j('#${idPrefix}-timer-sec').text(Math.floor(seconds)%60);
@@ -67,5 +68,5 @@
 </style>
 
 <p id="${idPrefix}-timer" class="countdown countdown-${labelColor}UI">
-	<span id="${idPrefix}-timer-days"></span> <span class='cd-time'>days</span> <span id="${idPrefix}-timer-hours"></span> <span class='cd-time'>hours</span> <span id="${idPrefix}-timer-mins"></span> <span class='cd-time'>mins</span> <span id="${idPrefix}-timer-sec"></span> <span class='cd-time'>sec</span>
+	<span id="${idPrefix}-timer-weeks"></span> <span class='cd-time'>weeks</span><span id="${idPrefix}-timer-days"></span> <span class='cd-time'>days</span> <span id="${idPrefix}-timer-hours"></span> <span class='cd-time'>hours</span> <span id="${idPrefix}-timer-mins"></span> <span class='cd-time'>mins</span> <span id="${idPrefix}-timer-sec"></span> <span class='cd-time'>sec</span>
 </p>

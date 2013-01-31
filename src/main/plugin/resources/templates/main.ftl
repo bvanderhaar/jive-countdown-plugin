@@ -1,194 +1,196 @@
 <pre>Countdown to: ${countdownDate} ${countdownTime}</pre>
 <pre>Color Labels: ${labelColor}, Color Numbers: $(numberColor}</pre>
 
-/*
-* jCountdown 1.4.3 jQuery Plugin
-* Copyright 2012 Tom Ellis http://www.webmuse.co.uk | MIT Licensed (license.txt)
-*/
-(function($) {
-$j.fn.countdown = function( method /*, options*/ ) {
+<script type="text/javascript">
 
-var defaults = {
-date: null,
-updateTime: 1000,
-htmlTemplate: "%d <span class='cd-time'>days</span> %h <span class='cd-time'>hours</span> %i <span class='cd-time'>mins</span> %s <span class='cd-time'>sec</span>",
-minus: false,
-onChange: null,
-onComplete: null,
-onResume: null,
-onPause: null,
-leadingZero: false,
-offset: null,
-servertime:null,
-hoursOnly: false,
-minsOnly: false,
-secsOnly: false,
-weeks: false,
-hours: false,
-yearsAndMonths: false,
-direction: "down",
-stopwatch: false
-},
-slice = Array.prototype.slice,
-clear = window.clearInterval,
-floor = Math.floor,
-msPerHr = 3600000,
-secPerYear = 31556926,
-secPerMonth = 2629743.83,
-secPerWeek = 604800,
-secPerDay = 86400,
-secPerHr = 3600,
-secPerMin = 60,
-secPerSec = 1,
-rDate = /(%y|%m|%w|%d|%h|%i|%s)/g,
-rYears = /%y/,
-rMonths = /%m/,
-rWeeks = /%w/,
-rDays = /%d/,
-rHrs = /%h/,
-rMins = /%i/,
-rSecs = /%s/,
-dateNow = function( $this ) {
-var now = new Date(),
-settings = $this.data("jcdData");
+    /*
+    * jCountdown 1.4.3 jQuery Plugin
+    * Copyright 2012 Tom Ellis http://www.webmuse.co.uk | MIT Licensed (license.txt)
+    */
+    (function($) {
+    $.fn.countdown = function( method /*, options*/ ) {
 
-if( !settings ) {
-return new Date();
-}
+    var defaults = {
+    date: null,
+    updateTime: 1000,
+    htmlTemplate: "%d <span class='cd-time'>days</span> %h <span class='cd-time'>hours</span> %i <span class='cd-time'>mins</span> %s <span class='cd-time'>sec</span>",
+    minus: false,
+    onChange: null,
+    onComplete: null,
+    onResume: null,
+    onPause: null,
+    leadingZero: false,
+    offset: null,
+    servertime:null,
+    hoursOnly: false,
+    minsOnly: false,
+    secsOnly: false,
+    weeks: false,
+    hours: false,
+    yearsAndMonths: false,
+    direction: "down",
+    stopwatch: false
+    },
+    slice = Array.prototype.slice,
+    clear = window.clearInterval,
+    floor = Math.floor,
+    msPerHr = 3600000,
+    secPerYear = 31556926,
+    secPerMonth = 2629743.83,
+    secPerWeek = 604800,
+    secPerDay = 86400,
+    secPerHr = 3600,
+    secPerMin = 60,
+    secPerSec = 1,
+    rDate = /(%y|%m|%w|%d|%h|%i|%s)/g,
+    rYears = /%y/,
+    rMonths = /%m/,
+    rWeeks = /%w/,
+    rDays = /%d/,
+    rHrs = /%h/,
+    rMins = /%i/,
+    rSecs = /%s/,
+    dateNow = function( $this ) {
+    var now = new Date(),
+    settings = $this.data("jcdData");
 
-if( settings.offset !== null ) {
-now = getTZDate( settings.offset );
-} else {
-now = getTZDate( null, settings.difference ); //Date now
-}
+    if( !settings ) {
+    return new Date();
+    }
 
-now.setMilliseconds(0);
+    if( settings.offset !== null ) {
+    now = getTZDate( settings.offset );
+    } else {
+    now = getTZDate( null, settings.difference ); //Date now
+    }
 
-return now;
-},
-getTZDate = function( offset, difference ) {
-var hrs,
-dateMS,
-curHrs,
-tmpDate = new Date();
+    now.setMilliseconds(0);
 
-if( offset === null ) {
-dateMS = tmpDate.getTime() - difference;
-} else {
-hrs = offset * msPerHr;
-curHrs = tmpDate.getTime() - ( ( -tmpDate.getTimezoneOffset() / 60 ) * msPerHr ) + hrs;
-dateMS = tmpDate.setTime( curHrs );
-}
-return new Date( dateMS );
-},
-timerFunc = function() {
-//Function runs at set interval updating countdown
-var $this = this,
-template,
-now,
-date,
-timeLeft,
-yearsLeft,
-monthsLeft,
-weeksLeft,
-//eDaysLeft,
-daysLeft,
-//eHrsLeft,
-hrsLeft,
-minsLeft,
-//eMinsleft,
-secLeft,
-time = "",
-diff,
-extractSection = function( numSecs ) {
-var amount;
+    return now;
+    },
+    getTZDate = function( offset, difference ) {
+    var hrs,
+    dateMS,
+    curHrs,
+    tmpDate = new Date();
 
-amount = floor( diff / numSecs );
-diff -= amount * numSecs;
+    if( offset === null ) {
+    dateMS = tmpDate.getTime() - difference;
+    } else {
+    hrs = offset * msPerHr;
+    curHrs = tmpDate.getTime() - ( ( -tmpDate.getTimezoneOffset() / 60 ) * msPerHr ) + hrs;
+    dateMS = tmpDate.setTime( curHrs );
+    }
+    return new Date( dateMS );
+    },
+    timerFunc = function() {
+    //Function runs at set interval updating countdown
+    var $this = this,
+    template,
+    now,
+    date,
+    timeLeft,
+    yearsLeft,
+    monthsLeft,
+    weeksLeft,
+    //eDaysLeft,
+    daysLeft,
+    //eHrsLeft,
+    hrsLeft,
+    minsLeft,
+    //eMinsleft,
+    secLeft,
+    time = "",
+    diff,
+    extractSection = function( numSecs ) {
+    var amount;
 
-return amount;
-},
-settings = $this.data("jcdData");
+    amount = floor( diff / numSecs );
+    diff -= amount * numSecs;
 
-if( !settings ) {
-return false;
-}
+    return amount;
+    },
+    settings = $this.data("jcdData");
 
-template = settings.htmlTemplate;
+    if( !settings ) {
+    return false;
+    }
 
-now = dateNow( $this );
+    template = settings.htmlTemplate;
 
-date = settings.dateObj; //Date to countdown to
+    now = dateNow( $this );
 
-date.setMilliseconds(0);
+    date = settings.dateObj; //Date to countdown to
 
-timeLeft = ( settings.direction === "down" ) ? date.getTime() - now.getTime() : now.getTime() - date.getTime();
+    date.setMilliseconds(0);
 
-diff = Math.round( timeLeft / 1000 );
+    timeLeft = ( settings.direction === "down" ) ? date.getTime() - now.getTime() : now.getTime() - date.getTime();
 
-daysLeft = extractSection( secPerDay );
-hrsLeft = extractSection( secPerHr );
-minsLeft = extractSection( secPerMin );
-secLeft = extractSection( secPerSec );
+    diff = Math.round( timeLeft / 1000 );
 
-if( settings.yearsAndMonths ) {
+    daysLeft = extractSection( secPerDay );
+    hrsLeft = extractSection( secPerHr );
+    minsLeft = extractSection( secPerMin );
+    secLeft = extractSection( secPerSec );
 
-//Add days back on so we can calculate years easier
-diff += ( daysLeft * secPerDay );
+    if( settings.yearsAndMonths ) {
 
-yearsLeft = extractSection( secPerYear );
-monthsLeft = extractSection( secPerMonth );
-daysLeft = extractSection( secPerDay );
-}
+    //Add days back on so we can calculate years easier
+    diff += ( daysLeft * secPerDay );
 
-if( settings.weeks ) {
-//Add days back on so we can calculate weeks easier
-diff += ( daysLeft * secPerDay );
+    yearsLeft = extractSection( secPerYear );
+    monthsLeft = extractSection( secPerMonth );
+    daysLeft = extractSection( secPerDay );
+    }
 
-weeksLeft = extractSection( secPerWeek );
-daysLeft = extractSection( secPerDay );
-}
+    if( settings.weeks ) {
+    //Add days back on so we can calculate weeks easier
+    diff += ( daysLeft * secPerDay );
 
-//Assumes you are using dates within a month
-//as years and months aren't taken into account
-if( settings.hoursOnly ) {
-hrsLeft += daysLeft * 24;
-daysLeft = 0;
-}
+    weeksLeft = extractSection( secPerWeek );
+    daysLeft = extractSection( secPerDay );
+    }
 
-//Assumes you are only using dates in the near future
-//as years and months aren't taken into account
-if( settings.minsOnly ) {
-minsLeft += ( hrsLeft * 60 ) + ( ( daysLeft * 24 ) * 60 );
-daysLeft = hrsLeft = 0;
-}
+    //Assumes you are using dates within a month
+    //as years and months aren't taken into account
+    if( settings.hoursOnly ) {
+    hrsLeft += daysLeft * 24;
+    daysLeft = 0;
+    }
 
-//Assumes you are only using dates in the near future
-//as years, months and days aren't taken into account
-if( settings.secsOnly ) {
-secLeft += ( minsLeft * 60 );
-daysLeft = hrsLeft = minsLeft = 0;
-}
+    //Assumes you are only using dates in the near future
+    //as years and months aren't taken into account
+    if( settings.minsOnly ) {
+    minsLeft += ( hrsLeft * 60 ) + ( ( daysLeft * 24 ) * 60 );
+    daysLeft = hrsLeft = 0;
+    }
 
-settings.yearsLeft = yearsLeft;
-settings.monthsLeft = monthsLeft;
-settings.weeksLeft = weeksLeft;
-settings.daysLeft = daysLeft;
-settings.hrsLeft = hrsLeft;
-settings.minsLeft = minsLeft;
-settings.secLeft = secLeft;
+    //Assumes you are only using dates in the near future
+    //as years, months and days aren't taken into account
+    if( settings.secsOnly ) {
+    secLeft += ( minsLeft * 60 );
+    daysLeft = hrsLeft = minsLeft = 0;
+    }
 
-if( secLeft === 60 ) {
-secLeft = 0;
-}
+    settings.yearsLeft = yearsLeft;
+    settings.monthsLeft = monthsLeft;
+    settings.weeksLeft = weeksLeft;
+    settings.daysLeft = daysLeft;
+    settings.hrsLeft = hrsLeft;
+    settings.minsLeft = minsLeft;
+    settings.secLeft = secLeft;
 
-if ( settings.leadingZero ) {
+    if( secLeft === 60 ) {
+    secLeft = 0;
+    }
 
-if ( daysLeft < 10 && !settings.hoursOnly ) {
-daysLeft = "0" + daysLeft;
-}
+    if ( settings.leadingZero ) {
 
-if ( yearsLeft < 10 ) {
+    if ( daysLeft < 10 && !settings.hoursOnly ) {
+    daysLeft = "0" + daysLeft;
+    }
+
+    if ( yearsLeft < 10 ) {
 					yearsLeft = "0" + yearsLeft;
 				}
 				
@@ -380,93 +382,93 @@ if ( yearsLeft < 10 ) {
 																		
 						if( settings.stopwatch && settings.direction === "up" ) {
 
-var t = dateNow( $this ).getTime() - settings.pausedAt.getTime(),
-d = new Date();
-d.setTime( settings.dateObj.getTime() + t );
+    var t = dateNow( $this ).getTime() - settings.pausedAt.getTime(),
+    d = new Date();
+    d.setTime( settings.dateObj.getTime() + t );
 
-settings.dateObj = d; //This is internal date
-}
+    settings.dateObj = d; //This is internal date
+    }
 
-func();
-}
-});
-},
-pause: function() {
-//Pause a countdown timer
-return this.each(function() {
-var $this = $(this),
-settings = $this.data("jcdData");
+    func();
+    }
+    });
+    },
+    pause: function() {
+    //Pause a countdown timer
+    return this.each(function() {
+    var $this = $(this),
+    settings = $this.data("jcdData");
 
-if( !settings ) {
-return true;
-}
+    if( !settings ) {
+    return true;
+    }
 
-if( settings.stopwatch ) {
-settings.pausedAt = dateNow( $this );
-}
-//Clear interval (Will be started on resume)
-clear( settings.timer );
-//Trigger pause event handler
-$this.data("jcdData", settings).trigger("pause.jcdevt", [settings] ).trigger("countPause", [settings] );
-});
-},
-complete: function() {
-return this.each(function() {
-var $this = $(this),
-settings = $this.data("jcdData");
+    if( settings.stopwatch ) {
+    settings.pausedAt = dateNow( $this );
+    }
+    //Clear interval (Will be started on resume)
+    clear( settings.timer );
+    //Trigger pause event handler
+    $this.data("jcdData", settings).trigger("pause.jcdevt", [settings] ).trigger("countPause", [settings] );
+    });
+    },
+    complete: function() {
+    return this.each(function() {
+    var $this = $(this),
+    settings = $this.data("jcdData");
 
-if( !settings ) {
-return true;
-}
-//Clear timer
-clear( settings.timer );
-settings.hasCompleted = true;
-//Update setting, trigger complete event handler, then unbind all events
-//We don"t delete the settings in case they need to be checked later on
-$this.data("jcdData", settings).trigger("complete.jcdevt").trigger("countComplete", [settings] ).off(".jcdevt");
-});
-},
-destroy: function() {
-return this.each(function() {
-var $this = $(this),
-settings = $this.data("jcdData");
+    if( !settings ) {
+    return true;
+    }
+    //Clear timer
+    clear( settings.timer );
+    settings.hasCompleted = true;
+    //Update setting, trigger complete event handler, then unbind all events
+    //We don"t delete the settings in case they need to be checked later on
+    $this.data("jcdData", settings).trigger("complete.jcdevt").trigger("countComplete", [settings] ).off(".jcdevt");
+    });
+    },
+    destroy: function() {
+    return this.each(function() {
+    var $this = $(this),
+    settings = $this.data("jcdData");
 
-if( !settings ) {
-return true;
-}
-//Clear timer
-clear( settings.timer );
-//Unbind all events, remove data and put DOM Element back to its original state (HTML wise)
-$this.off(".jcdevt").removeData("jcdData").html( settings.originalHTML );
-});
-},
-getSettings: function( name ) {
-var $this = $(this),
-settings = $this.data("jcdData");
+    if( !settings ) {
+    return true;
+    }
+    //Clear timer
+    clear( settings.timer );
+    //Unbind all events, remove data and put DOM Element back to its original state (HTML wise)
+    $this.off(".jcdevt").removeData("jcdData").html( settings.originalHTML );
+    });
+    },
+    getSettings: function( name ) {
+    var $this = $(this),
+    settings = $this.data("jcdData");
 
-//If an individual setting is required
-if( name && settings ) {
-//If it exists, return it
-if( settings.hasOwnProperty( name ) ) {
-return settings[name];
-}
-return undefined;
-}
-//Return all settings or undefined
-return settings;
-}
-};
+    //If an individual setting is required
+    if( name && settings ) {
+    //If it exists, return it
+    if( settings.hasOwnProperty( name ) ) {
+    return settings[name];
+    }
+    return undefined;
+    }
+    //Return all settings or undefined
+    return settings;
+    }
+    };
 
-if( methods[ method ] ) {
-return methods[ method ].apply( this, slice.call( arguments, 1 ) );
-} else if ( typeof method === "object" || !method ) {
-return methods.init.apply( this, arguments );
-} else {
-$.error("Method "+ method +" does not exist in the jCountdown Plugin");
-}
-};
+    if( methods[ method ] ) {
+    return methods[ method ].apply( this, slice.call( arguments, 1 ) );
+    } else if ( typeof method === "object" || !method ) {
+    return methods.init.apply( this, arguments );
+    } else {
+    $.error("Method "+ method +" does not exist in the jCountdown Plugin");
+    }
+    };
 
-})(jQuery);
+    })(jQuery);
 
 </script>
 
@@ -517,12 +519,12 @@ $.error("Method "+ method +" does not exist in the jCountdown Plugin");
 
 <script type="text/javascript">
 
-    $j(document).ready(function () {
+    $(document).ready(function () {
 
-        $j("#time").countdown({
-            date: "${countdownDate} ${countdownTime}",
-            leadingZero: true
-        });
+    $("#time").countdown({
+        date: "${countdownDate} ${countdownTime}",
+        leadingZero: true
+    });
 
     });
 

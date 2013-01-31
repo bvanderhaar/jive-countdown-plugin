@@ -8,7 +8,7 @@
     * Copyright 2012 Tom Ellis http://www.webmuse.co.uk | MIT Licensed (license.txt)
     */
     (function($) {
-    $.fn.countdown = function( method /*, options*/ ) {
+    $j.fn.countdown = function( method /*, options*/ ) {
 
     var defaults = {
     date: null,
@@ -519,9 +519,9 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    $j(document).ready(function () {
 
-    $("#time").countdown({
+    $j("#time").countdown({
         date: "${countdownDate} ${countdownTime}",
         leadingZero: true
     });

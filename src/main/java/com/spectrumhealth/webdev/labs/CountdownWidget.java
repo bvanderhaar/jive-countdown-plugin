@@ -6,10 +6,12 @@ import com.jivesoftware.community.widget.WidgetTypeMarker;
 import com.jivesoftware.community.widget.WidgetType;
 
 @WidgetTypeMarker({WidgetType.COMMUNITY, WidgetType.HOMEPAGE, WidgetType.PERSONALIZEDHOMEPAGE, WidgetType.SOCIALGROUP, WidgetType.PROJECT})
-@PropertyNames("countdownDate")
+@PropertyNames({"countdownDate", "coutndownTime", "color"})
 public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidget {
     private static final String FREEMARKER_FILE = "/plugins/countdown-widget/resources/templates/main.ftl";
-    private java.util.Date countdownDate = new java.util.Date();
+    private String countdownDate = "1/1/2013";
+    private String countdownTime = "5:00PM";
+    private String color = "test";
 	
 	public String getDescription(WidgetContext arg0) {
 		return "Displays a countdown from a specified date time.";
@@ -24,11 +26,27 @@ public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidge
 	            FREEMARKER_FILE);
 	}
 
-	public java.util.Date getCountdownDate() {
+	public String getCountdownDate() {
 	    return countdownDate;
 	}
 	
-	public void setCountdownDate(java.util.Date countdownDate) {
+	public void setCountdownDate(String countdownDate) {
 	    this.countdownDate = countdownDate;
+	}
+	
+	public String getCountdownTime() {
+		return countdownTime;
+	}
+	
+	public void setCountdownTime(String countdownTime) {
+		this.countdownTime = countdownTime;
+	}
+	
+	public String getColor() {
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 }

@@ -1,7 +1,7 @@
-
-<pre>${countdownDate}</pre>
+<#list .main?keys as var>
+    ${var}
+</#list>
+<pre>${color}</pre>
 <script type="text/javascript">
-
-alert(${countdownDate});
 
 </script>

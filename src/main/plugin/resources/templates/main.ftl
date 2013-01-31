@@ -511,6 +511,7 @@ $.error("Method "+ method +" does not exist in the jCountdown Plugin");
 
     p.countdown-BlueUI .cd-time{
     color:#1017c2;
+    }
 
 </style>
 

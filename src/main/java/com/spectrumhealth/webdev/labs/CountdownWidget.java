@@ -12,7 +12,7 @@ import com.jivesoftware.community.widget.WidgetType;
 public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidget {
     private static final String FREEMARKER_FILE = "/plugins/countdown-widget/resources/templates/main.ftl";
     private String countdownDate = "1/1/2020";
-    private String countdownTime = "5:00PM";
+    private String countdownTime = "5:00 PM";
     private String numericColor = "Green";
     private String labelColor = "Black";
     

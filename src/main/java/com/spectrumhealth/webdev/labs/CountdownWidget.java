@@ -8,7 +8,7 @@ import com.jivesoftware.community.widget.WidgetTypeMarker;
 import com.jivesoftware.community.widget.WidgetType;
 
 @WidgetTypeMarker({WidgetType.COMMUNITY, WidgetType.HOMEPAGE, WidgetType.PERSONALIZEDHOMEPAGE, WidgetType.SOCIALGROUP, WidgetType.PROJECT})
-@PropertyNames({"countdownDate", "coutndownTime", "numericColor", "labelColor"})
+@PropertyNames({"countdownDate", "countdownTime", "numericColor", "labelColor"})
 public class CountdownWidget extends com.jivesoftware.community.widget.BaseWidget {
     private static final String FREEMARKER_FILE = "/plugins/countdown-widget/resources/templates/main.ftl";
     private String countdownDate = "1/1/2020";

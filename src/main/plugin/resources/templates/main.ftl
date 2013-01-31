@@ -1,3 +1,5 @@
+<#assign idPrefix = StringUtils.randomString(6) />
+
 <script type="text/javascript">
 
     /*

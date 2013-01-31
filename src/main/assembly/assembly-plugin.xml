@@ -21,7 +21,7 @@
             <outputDirectory>/</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>src/main/beans</directory>
+            <directory>src/main/java/beans</directory>
             <outputDirectory>classes/beans</outputDirectory>
         </fileSet> 
         <fileSet>
